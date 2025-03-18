@@ -33,13 +33,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="device">
+        <div className="device pb-16">
           {children}
           <div
             className="border-t"
             style={{
               width: "100dvw",
-              gridArea: "footer/fullbleed",
+              position: "fixed",
+              bottom: 0,
+              height: "4rem",
             }}
           >
             <BottomNavigation />

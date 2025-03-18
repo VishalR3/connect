@@ -17,11 +17,11 @@ export default function ApplyTimeOff() {
     to: new Date(),
   });
   return (
-    <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-6 py-6">
+      <div className="flex flex-col gap-3">
         <Label>Leave Type</Label>
         <Select>
-          <SelectTrigger className="w-full min-w-[180px]">
+          <SelectTrigger className="w-full min-w-[180px] min-h-12">
             <SelectValue placeholder="Leave Type" />
           </SelectTrigger>
           <SelectContent>
@@ -33,11 +33,11 @@ export default function ApplyTimeOff() {
           </SelectContent>
         </Select>
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Label>Reason for Leave</Label>
-        <Textarea placeholder="Reason for leave" />
+        <Textarea placeholder="Reason for leave" rows={5} />
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Label>Date Range</Label>
         <DateFilter date={date} setDate={setDate} />
       </div>

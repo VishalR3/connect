@@ -39,7 +39,7 @@ export default function DateFilter({ date, setDate }: any) {
             id="date"
             variant={"outline"}
             className={cn(
-              "justify-start text-left font-normal",
+              "justify-start text-left font-normal min-h-12",
               !date && "text-muted-foreground"
             )}
           >
