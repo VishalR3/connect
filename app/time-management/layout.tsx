@@ -1,19 +1,22 @@
-export default function Home() {
+import { ReactNode } from "react";
+
+export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <div
         style={{
           gridArea: "primary-header/main",
+          alignItems: "center",
         }}
       >
-        Primary Header
+        <div className="text-2xl">Time Management</div>
       </div>
       <div
         style={{
           gridArea: "main/main",
         }}
       >
-        Main Page
+        {children}
       </div>
     </>
   );
