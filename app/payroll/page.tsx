@@ -71,7 +71,7 @@ export default function Payroll() {
   );
   return (
     <div className="flex flex-col gap-6 py-4">
-      <div>
+      <div className="flex justify-center w-full h-64">
         <PayrollPieChart value={totalEarnings - totalDeductions} />
       </div>
       <div>
