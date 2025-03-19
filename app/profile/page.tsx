@@ -20,8 +20,8 @@ export default function ProfilePage() {
     },
   };
   return (
-    <div className="flex flex-col gap-6 py-4">
-      <div className="flex items-center gap-4 px-4 pb-4 border-b">
+    <div className="flex flex-col gap-6 pb-4">
+      <div className="flex items-center gap-4 px-4 py-4 border-b sticky top-0  z-50 bg-background">
         <div>
           <Avatar className="size-12">
             <AvatarImage src="https://github.com/shadcn.png" />

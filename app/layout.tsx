@@ -49,7 +49,7 @@ export default function RootLayout({
               bottom: 0,
               height: "calc(4rem + env(safe-area-inset-bottom))",
               paddingBottom: "env(safe-area-inset-bottom)",
-              backgroundColor: "var(--background-color)",
+              backgroundColor: "var(--background)",
             }}
           >
             <BottomNavigation />

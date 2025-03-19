@@ -81,79 +81,81 @@ export default function Payroll() {
     setSelectedMonth(dayjs(selectedMonth).add(value, "month"));
   };
   return (
-    <div className="flex flex-col gap-6 py-4">
-      <div className="flex flex-col justify-center w-full">
-        <div className="flex items-center justify-between">
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            onClick={() => changeMonth(-1)}
-          >
-            <ChevronLeft />
-          </Button>
-          <div className="font-semibold">
-            {dayjs(selectedMonth).format("MMMM YYYY")}
-          </div>
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            onClick={() => changeMonth(1)}
-          >
-            <ChevronRight />
-          </Button>
+    <>
+      <div className="flex items-center justify-between sticky top-0 pt-4 pb-2 z-50 bg-background">
+        <Button
+          size={"icon"}
+          variant={"outline"}
+          onClick={() => changeMonth(-1)}
+        >
+          <ChevronLeft />
+        </Button>
+        <div className="font-semibold">
+          {dayjs(selectedMonth).format("MMMM YYYY")}
         </div>
-        <div className="h-64">
-          <PayrollPieChart value={400000} />
-        </div>
-      </div>
-      <div>
-        <div className="flex items-center gap-4">
-          <div className="flex-1 rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
-            <div className="text-xl mb-1">
-              {formatIndianCurrency(totalEarnings)}
-            </div>
-            <div>Earnings</div>
-          </div>
-          <div className="flex-1 rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
-            <div className="text-xl mb-1">
-              {formatIndianCurrency(totalDeductions)}
-            </div>
-            <div>Deductions</div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <CollapsibleSection header={"Earnings & Allowances"}>
-          {earnings.map((earning, index) => (
-            <div
-              key={index}
-              className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm flex items-center justify-between"
-            >
-              <div>{earning.name}</div>
-              <div>{formatIndianCurrency(earning.amount)}</div>
-            </div>
-          ))}
-        </CollapsibleSection>
-      </div>
-      <div>
-        <CollapsibleSection defaultOpen={true} header={"Deductions"}>
-          {deductions.map((deduction, index) => (
-            <div
-              key={index}
-              className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm flex items-center justify-between"
-            >
-              <div>{deduction.name}</div>
-              <div>{formatIndianCurrency(deduction.amount)}</div>
-            </div>
-          ))}
-        </CollapsibleSection>
-      </div>
-      <div>
-        <Button className="w-full min-h-12">
-          <Download />
-          Download Payslip
+        <Button
+          size={"icon"}
+          variant={"outline"}
+          onClick={() => changeMonth(1)}
+        >
+          <ChevronRight />
         </Button>
       </div>
-    </div>
+      <div className="flex flex-col gap-6 pb-4">
+        <div className="flex flex-col justify-center w-full">
+          <div className="h-64">
+            <PayrollPieChart value={400000} />
+          </div>
+        </div>
+        <div>
+          <div className="flex items-center gap-4">
+            <div className="flex-1 rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+              <div className="text-xl mb-1">
+                {formatIndianCurrency(totalEarnings)}
+              </div>
+              <div>Earnings</div>
+            </div>
+            <div className="flex-1 rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
+              <div className="text-xl mb-1">
+                {formatIndianCurrency(totalDeductions)}
+              </div>
+              <div>Deductions</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <CollapsibleSection header={"Earnings & Allowances"}>
+            {earnings.map((earning, index) => (
+              <div
+                key={index}
+                className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm flex items-center justify-between"
+              >
+                <div>{earning.name}</div>
+                <div>{formatIndianCurrency(earning.amount)}</div>
+              </div>
+            ))}
+          </CollapsibleSection>
+        </div>
+        <div>
+          <CollapsibleSection defaultOpen={true} header={"Deductions"}>
+            {deductions.map((deduction, index) => (
+              <div
+                key={index}
+                className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm flex items-center justify-between"
+              >
+                <div>{deduction.name}</div>
+                <div>{formatIndianCurrency(deduction.amount)}</div>
+              </div>
+            ))}
+          </CollapsibleSection>
+        </div>
+        <div>
+          <Button className="w-full min-h-12">
+            <Download />
+            Download Payslip
+          </Button>
+        </div>
+      </div>
+    </>
   );
 }
