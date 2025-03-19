@@ -1,20 +1,12 @@
+import PayrollChart from "./payroll/payroll-chart";
+
 export default function Home() {
   return (
-    <>
-      <div
-        style={{
-          gridArea: "primary-header/main",
-        }}
-      >
-        Primary Header
+    <div className="flex flex-col gap-6 py-4">
+      <div className="flex flex-col gap-4">
+        <div className="px-4">Payroll Overview</div>
+        <PayrollChart />
       </div>
-      <div
-        style={{
-          gridArea: "main/main",
-        }}
-      >
-        Main Page
-      </div>
-    </>
+    </div>
   );
 }

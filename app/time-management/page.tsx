@@ -24,7 +24,7 @@ export default function TimeManagement() {
     return { type: "Sick Leave", start: date, end: date, days: 1 };
   });
   return (
-    <div className="flex flex-col gap-6 py-4">
+    <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-3">
         <h2 className="text-lg text-center">Your Calendar</h2>
         <div className="flex justify-center">
