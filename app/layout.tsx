@@ -47,7 +47,8 @@ export default function RootLayout({
               width: "100dvw",
               position: "fixed",
               bottom: 0,
-              height: "4rem",
+              height: "4rem + env(safe-area-inset-bottom)",
+              paddingBottom: "env(safe-area-inset-bottom)",
             }}
           >
             <BottomNavigation />
