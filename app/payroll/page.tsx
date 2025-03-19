@@ -2,6 +2,8 @@ import { useMemo } from "react";
 import PayrollCategory from "./payroll-category";
 import PayrollPieChart from "./payroll-pie-chart";
 import { formatIndianCurrency } from "@/utils/utils";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 export default function Payroll() {
   const earnings = [
@@ -116,6 +118,12 @@ export default function Payroll() {
             </div>
           ))}
         </PayrollCategory>
+      </div>
+      <div>
+        <Button className="w-full min-h-12">
+          <Download />
+          Download Payslip
+        </Button>
       </div>
     </div>
   );
