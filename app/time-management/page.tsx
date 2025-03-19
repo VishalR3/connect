@@ -1,5 +1,3 @@
-import { List } from "@mui/material";
-import LeaveHistory from "./leave-history";
 import { Calendar } from "@/components/ui/calendar";
 import dayjs from "dayjs";
 import LeaveRecord from "./leave-record";
