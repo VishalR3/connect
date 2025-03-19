@@ -1,68 +1,72 @@
-import { useMemo } from "react";
+"use client";
+import { useMemo, useState } from "react";
 import PayrollCategory from "./payroll-category";
 import PayrollPieChart from "./payroll-pie-chart";
 import { formatIndianCurrency } from "@/utils/utils";
 import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { ChevronLeft, ChevronRight, Download } from "lucide-react";
+import dayjs from "dayjs";
+
+const earnings = [
+  {
+    name: "Basic Salary",
+    amount: 100,
+  },
+  {
+    name: "House Rent Allowances",
+    amount: 100,
+  },
+  {
+    name: "Transport Allowances",
+    amount: 100,
+  },
+  {
+    name: "LTA - Monthly",
+    amount: 100,
+  },
+  {
+    name: "Meal Allowance",
+    amount: 100,
+  },
+  {
+    name: "Special Allowance",
+    amount: 100,
+  },
+  {
+    name: "NPS Allowance",
+    amount: 100,
+  },
+  {
+    name: "Internet Allowance",
+    amount: 100,
+  },
+  {
+    name: "Medical Allowance",
+    amount: 100,
+  },
+];
+
+const deductions = [
+  {
+    name: "Income Tax",
+    amount: 100,
+  },
+  {
+    name: "Provident Fund",
+    amount: 13,
+  },
+  {
+    name: "LWF Contribution",
+    amount: 2,
+  },
+  {
+    name: "Recovery (Rounding)",
+    amount: 0.39,
+  },
+];
 
 export default function Payroll() {
-  const earnings = [
-    {
-      name: "Basic Salary",
-      amount: 100,
-    },
-    {
-      name: "House Rent Allowances",
-      amount: 100,
-    },
-    {
-      name: "Transport Allowances",
-      amount: 100,
-    },
-    {
-      name: "LTA - Monthly",
-      amount: 100,
-    },
-    {
-      name: "Meal Allowance",
-      amount: 100,
-    },
-    {
-      name: "Special Allowance",
-      amount: 100,
-    },
-    {
-      name: "NPS Allowance",
-      amount: 100,
-    },
-    {
-      name: "Internet Allowance",
-      amount: 100,
-    },
-    {
-      name: "Medical Allowance",
-      amount: 100,
-    },
-  ];
-
-  const deductions = [
-    {
-      name: "Income Tax",
-      amount: 100,
-    },
-    {
-      name: "Provident Fund",
-      amount: 13,
-    },
-    {
-      name: "LWF Contribution",
-      amount: 2,
-    },
-    {
-      name: "Recovery (Rounding)",
-      amount: 0.39,
-    },
-  ];
+  const [selectedMonth, setSelectedMonth] = useState(dayjs().startOf("month"));
 
   const totalEarnings = useMemo(
     () => earnings.reduce((a, b) => a + b.amount, 0),
@@ -72,10 +76,35 @@ export default function Payroll() {
     () => deductions.reduce((a, b) => a + b.amount, 0),
     []
   );
+
+  const changeMonth = (value: number) => {
+    setSelectedMonth(dayjs(selectedMonth).add(value, "month"));
+  };
   return (
     <div className="flex flex-col gap-6 py-4">
-      <div className="flex justify-center w-full h-64">
-        <PayrollPieChart value={400000} />
+      <div className="flex flex-col justify-center w-full">
+        <div className="flex items-center justify-between">
+          <Button
+            size={"icon"}
+            variant={"outline"}
+            onClick={() => changeMonth(-1)}
+          >
+            <ChevronLeft />
+          </Button>
+          <div className="font-semibold">
+            {dayjs(selectedMonth).format("MMMM YYYY")}
+          </div>
+          <Button
+            size={"icon"}
+            variant={"outline"}
+            onClick={() => changeMonth(1)}
+          >
+            <ChevronRight />
+          </Button>
+        </div>
+        <div className="h-64">
+          <PayrollPieChart value={400000} />
+        </div>
       </div>
       <div>
         <div className="flex items-center gap-4">
