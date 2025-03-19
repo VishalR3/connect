@@ -38,7 +38,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="device pb-16">
+        <div
+          className="device"
+          style={{ paddingBottom: "calc(4rem + env(safe-area-inset-bottom))" }}
+        >
           {children}
           {modal}
           <div

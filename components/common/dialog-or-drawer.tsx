@@ -39,7 +39,7 @@ export default function DialogOrDrawer({
       <DialogTitle sx={{ display: title ? "block" : "none" }}>
         {title ?? "Dialog Title"}
       </DialogTitle>
-      <DialogContent sx={{ p: 0 }}>{open && children}</DialogContent>
+      <DialogContent sx={{ p: 0 }}>{children}</DialogContent>
     </Dialog>
   ) : (
     <Drawer open={open} onClose={handleClose}>
@@ -49,7 +49,7 @@ export default function DialogOrDrawer({
           maxHeight: "95dvh",
         }}
       >
-        {open && children}
+        {children}
       </DrawerContent>
     </Drawer>
   );

@@ -101,7 +101,7 @@ export default function Payroll() {
           <ChevronRight />
         </Button>
       </div>
-      <div className="flex flex-col gap-6 pb-4">
+      <div className="flex flex-col gap-6">
         <div className="flex flex-col justify-center w-full">
           <div className="h-64">
             <PayrollPieChart value={400000} />
