@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export default function BottomNavigation() {
   return (
-    <div className="grid h-full items-center bg-white">
+    <div className="grid h-full items-center bg-background">
       <div className="grid grid-cols-5 justify-items-center items-center">
         <Link href={"/"}>
           <LayoutDashboard size={28} />

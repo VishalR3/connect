@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/collapsible";
 import { useState } from "react";
 
-export default function PayrollCategory({
+export default function CollapsibleSection({
   defaultOpen = false,
   header,
   children,
@@ -25,7 +25,7 @@ export default function PayrollCategory({
     <Collapsible
       open={isOpen}
       onOpenChange={setIsOpen}
-      className="w-[350px] space-y-2"
+      className="min-w-[350px] w-full space-y-2"
     >
       <CollapsibleTrigger asChild>
         <div className="flex items-center justify-between space-x-4 px-4">

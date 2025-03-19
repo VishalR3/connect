@@ -1,6 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
-import PayrollCategory from "./payroll-category";
+import CollapsibleSection from "@/components/common/collapsible-section";
 import PayrollPieChart from "./payroll-pie-chart";
 import { formatIndianCurrency } from "@/utils/utils";
 import { Button } from "@/components/ui/button";
@@ -123,7 +123,7 @@ export default function Payroll() {
         </div>
       </div>
       <div>
-        <PayrollCategory header={"Earnings & Allowances"}>
+        <CollapsibleSection header={"Earnings & Allowances"}>
           {earnings.map((earning, index) => (
             <div
               key={index}
@@ -133,10 +133,10 @@ export default function Payroll() {
               <div>{formatIndianCurrency(earning.amount)}</div>
             </div>
           ))}
-        </PayrollCategory>
+        </CollapsibleSection>
       </div>
       <div>
-        <PayrollCategory defaultOpen={true} header={"Deductions"}>
+        <CollapsibleSection defaultOpen={true} header={"Deductions"}>
           {deductions.map((deduction, index) => (
             <div
               key={index}
@@ -146,7 +146,7 @@ export default function Payroll() {
               <div>{formatIndianCurrency(deduction.amount)}</div>
             </div>
           ))}
-        </PayrollCategory>
+        </CollapsibleSection>
       </div>
       <div>
         <Button className="w-full min-h-12">
