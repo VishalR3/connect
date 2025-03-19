@@ -5,6 +5,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { formatIndianCurrency } from "@/utils/utils";
 import { Label, Pie, PieChart } from "recharts";
 
 const chartData = [
@@ -44,7 +45,7 @@ export default function PayrollPieChart({ value }: { value: number }) {
   return (
     <ChartContainer
       config={chartConfig}
-      className="mx-auto aspect-square max-h-[250px]"
+      className="mx-auto aspect-square max-h-[280px]"
     >
       <PieChart>
         <ChartTooltip
@@ -71,16 +72,16 @@ export default function PayrollPieChart({ value }: { value: number }) {
                     <tspan
                       x={viewBox.cx}
                       y={viewBox.cy}
-                      className="fill-foreground text-3xl font-bold"
+                      className="fill-foreground text-xl font-bold"
                     >
-                      {value}
+                      {formatIndianCurrency(value)}
                     </tspan>
                     <tspan
                       x={viewBox.cx}
                       y={(viewBox.cy || 0) + 24}
                       className="fill-muted-foreground"
                     >
-                      Gross
+                      Gross Salary
                     </tspan>
                   </text>
                 );

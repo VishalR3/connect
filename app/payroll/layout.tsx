@@ -4,7 +4,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <div className="grid items-center px-4 py-4">
-        <div className="text-2xl">Payroll</div>
         <div className="grid">{children}</div>
       </div>
     </>

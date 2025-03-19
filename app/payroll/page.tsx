@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import PayrollCategory from "./payroll-category";
 import PayrollPieChart from "./payroll-pie-chart";
+import { formatIndianCurrency } from "@/utils/utils";
 
 export default function Payroll() {
   const earnings = [
@@ -72,16 +73,20 @@ export default function Payroll() {
   return (
     <div className="flex flex-col gap-6 py-4">
       <div className="flex justify-center w-full h-64">
-        <PayrollPieChart value={totalEarnings - totalDeductions} />
+        <PayrollPieChart value={400000} />
       </div>
       <div>
         <div className="flex items-center gap-4">
           <div className="flex-1 rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
-            <div className="text-xl mb-1">${totalEarnings}</div>
+            <div className="text-xl mb-1">
+              {formatIndianCurrency(totalEarnings)}
+            </div>
             <div>Earnings</div>
           </div>
           <div className="flex-1 rounded-md border px-4 py-2 font-mono text-sm shadow-sm">
-            <div className="text-xl mb-1">${totalDeductions}</div>
+            <div className="text-xl mb-1">
+              {formatIndianCurrency(totalDeductions)}
+            </div>
             <div>Deductions</div>
           </div>
         </div>
@@ -94,7 +99,7 @@ export default function Payroll() {
               className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm flex items-center justify-between"
             >
               <div>{earning.name}</div>
-              <div>${earning.amount}</div>
+              <div>{formatIndianCurrency(earning.amount)}</div>
             </div>
           ))}
         </PayrollCategory>
@@ -107,7 +112,7 @@ export default function Payroll() {
               className="rounded-md border px-4 py-2 font-mono text-sm shadow-sm flex items-center justify-between"
             >
               <div>{deduction.name}</div>
-              <div>${deduction.amount}</div>
+              <div>{formatIndianCurrency(deduction.amount)}</div>
             </div>
           ))}
         </PayrollCategory>
