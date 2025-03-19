@@ -16,6 +16,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Connect",
   description: "Time Management and Payroll",
+  appleWebApp: {
+    title: "Connect HR",
+  },
 };
 export const viewport: Viewport = {
   viewportFit: "cover",
@@ -25,8 +28,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -35,6 +40,7 @@ export default function RootLayout({
       >
         <div className="device pb-16">
           {children}
+          {modal}
           <div
             className="border-t"
             style={{
