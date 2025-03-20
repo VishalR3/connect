@@ -6,6 +6,7 @@ import { formatIndianCurrency } from "@/utils/utils";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 import dayjs from "dayjs";
+import StickyHeader from "@/components/common/sticky-header";
 
 const earnings = [
   {
@@ -82,7 +83,7 @@ export default function Payroll() {
   };
   return (
     <>
-      <div className="flex items-center justify-between sticky top-0 pt-4 pb-2 z-50 bg-background">
+      <StickyHeader className="px-4">
         <Button
           size={"icon"}
           variant={"outline"}
@@ -100,8 +101,8 @@ export default function Payroll() {
         >
           <ChevronRight />
         </Button>
-      </div>
-      <div className="flex flex-col gap-6">
+      </StickyHeader>
+      <div className="flex flex-col gap-6 px-4">
         <div className="flex flex-col justify-center w-full">
           <div className="h-64">
             <PayrollPieChart value={400000} />

@@ -5,6 +5,7 @@ import { Bell } from "lucide-react";
 import { Badge } from "@mui/material";
 import Announcement from "./announcement";
 import Stats from "./stats";
+import StickyHeader from "@/components/common/sticky-header";
 
 const stats = [
   {
@@ -28,7 +29,7 @@ const stats = [
 export default function Home() {
   return (
     <div className="flex flex-col gap-6 pb-4">
-      <div className="flex justify-between items-center px-4 sticky top-0 pt-4 pb-2 z-50 bg-background">
+      <StickyHeader>
         <div className="text-xl font-semibold">Home</div>
         <div>
           <Badge badgeContent={4} color="error" overlap="circular">
@@ -41,7 +42,7 @@ export default function Home() {
             </Button>
           </Badge>
         </div>
-      </div>
+      </StickyHeader>
 
       <Announcement />
       <div className="flex flex-col gap-2 px-4">

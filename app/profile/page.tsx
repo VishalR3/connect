@@ -1,4 +1,5 @@
 import CollapsibleSection from "@/components/common/collapsible-section";
+import StickyHeader from "@/components/common/sticky-header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Settings } from "lucide-react";
 
@@ -21,7 +22,7 @@ export default function ProfilePage() {
   };
   return (
     <div className="flex flex-col gap-6 pb-4">
-      <div className="flex items-center gap-4 px-4 py-4 border-b sticky top-0  z-50 bg-background">
+      <StickyHeader className="px-4 border-b gap-4">
         <div>
           <Avatar className="size-12">
             <AvatarImage src="https://github.com/shadcn.png" />
@@ -37,7 +38,7 @@ export default function ProfilePage() {
         <div>
           <Settings />
         </div>
-      </div>
+      </StickyHeader>
       <div>
         <CollapsibleSection header="Personal Information" defaultOpen>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 px-4">
