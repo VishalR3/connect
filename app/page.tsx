@@ -6,6 +6,10 @@ import { Badge } from "@mui/material";
 import Announcement from "./announcement";
 import Stats from "./stats";
 import StickyHeader from "@/components/common/sticky-header";
+import posts from "@/mocks/post";
+import Post from "@/components/social/post";
+import Poll from "@/components/social/poll";
+import poll from "@/mocks/poll";
 
 const stats = [
   {
@@ -22,7 +26,7 @@ const stats = [
   },
   {
     value: 3,
-    label: "Other Stat",
+    label: "Another Stat",
   },
 ];
 
@@ -53,6 +57,15 @@ export default function Home() {
         {stats.map((stat) => (
           <Stats key={stat.label} {...stat} />
         ))}
+      </div>
+      <div>
+        {/* <h2 className="px-4 text-xl mb-4">Social</h2> */}
+        <div className="flex flex-col gap-2 mt-8">
+          <Poll poll={poll} />
+          {posts.map((post) => (
+            <Post key={post.id} post={post} />
+          ))}
+        </div>
       </div>
     </div>
   );

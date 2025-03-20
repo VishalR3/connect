@@ -1,9 +1,12 @@
 "use client";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import {
+  Avatar,
+  BottomNavigation,
+  BottomNavigationAction,
+} from "@mui/material";
 import { CalendarDays, CircleDollarSign, LayoutDashboard } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const actions = [
   {
@@ -24,10 +27,11 @@ const actions = [
   {
     label: "Profile",
     icon: (
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+      <Avatar
+        alt="John Doe"
+        src="https://github.com/shadcn.png"
+        sx={{ width: 24, height: 24 }}
+      />
     ),
     href: "/profile",
   },
@@ -35,7 +39,15 @@ const actions = [
 
 export default function BottomNavigationBar() {
   const [value, setValue] = useState(0);
+  const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    const index = actions.findIndex((action) => action.href === pathname);
+    if (value === index) return;
+    if (index === -1) return;
+    setValue(index);
+  }, [pathname]);
   return (
     <BottomNavigation
       showLabels
@@ -56,30 +68,5 @@ export default function BottomNavigationBar() {
         />
       ))}
     </BottomNavigation>
-    // <div className="grid h-full items-center bg-background">
-    //   <div className="grid grid-cols-5 justify-items-center items-center">
-    //     <Link href={"/"}>
-    //       <LayoutDashboard size={28} />
-    //     </Link>
-    //     <Link href="/time-management">
-    //       <CalendarDays size={28} />
-    //     </Link>
-    //     <Link
-    //       href="/apply-time-off"
-    //       className="border p-2 rounded-full border-black"
-    //     >
-    //       <Plus size={28} />
-    //     </Link>
-    //     <Link href="/payroll">
-    //       <CircleDollarSign size={28} />
-    //     </Link>
-    //     <Link href="/profile">
-    //       <Avatar>
-    //         <AvatarImage src="https://github.com/shadcn.png" />
-    //         <AvatarFallback>CN</AvatarFallback>
-    //       </Avatar>
-    //     </Link>
-    //   </div>
-    // </div>
   );
 }
