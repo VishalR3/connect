@@ -11,6 +11,7 @@ import { useState } from "react";
 import DateFilter from "./date-filter";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function TimeOffPage() {
   const [date, setDate] = useState({
@@ -27,11 +28,21 @@ export default function TimeOffPage() {
               <SelectValue placeholder="Leave Type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="privilege">Privilege Leave</SelectItem>
-              <SelectItem value="casual">Casual Leave</SelectItem>
-              <SelectItem value="sick">Sick Leave</SelectItem>
-              <SelectItem value="bereavement">Bereavement Leave</SelectItem>
-              <SelectItem value="complimentary">Complimentary Leave</SelectItem>
+              <SelectItem value="privilege" className="h-12">
+                Privilege Leave
+              </SelectItem>
+              <SelectItem value="casual" className="h-12">
+                Casual Leave
+              </SelectItem>
+              <SelectItem value="sick" className="h-12">
+                Sick Leave
+              </SelectItem>
+              <SelectItem value="bereavement" className="h-12">
+                Bereavement Leave
+              </SelectItem>
+              <SelectItem value="complimentary" className="h-12">
+                Complimentary Leave
+              </SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -44,7 +55,16 @@ export default function TimeOffPage() {
           <DateFilter date={date} setDate={setDate} />
         </div>
       </div>
-      <div>
+      <div className="flex items-center space-x-3">
+        <Checkbox id="sendEmail" />
+        <label
+          htmlFor="sendEmail"
+          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+        >
+          Send Email to Manager
+        </label>
+      </div>
+      <div className="mt-12">
         <Button className="w-full min-h-12">Apply</Button>
       </div>
     </div>

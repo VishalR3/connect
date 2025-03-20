@@ -2,6 +2,9 @@ import { Calendar } from "@/components/ui/calendar";
 import dayjs from "dayjs";
 import LeaveRecord from "./leave-record";
 import { useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import { CalendarClock, CalendarPlus } from "lucide-react";
+import ApplyTimeOffBtn from "./apply-time-off-btn";
 
 export default function TimeManagement() {
   const leaveDays = [
@@ -52,6 +55,9 @@ export default function TimeManagement() {
             <LeaveRecord key={i} leave={leave} />
           ))}
         </div>
+      </div>
+      <div className="px-4 flex items-center gap-3">
+        <ApplyTimeOffBtn />
       </div>
       <div className="px-4">
         <h2 className="text-lg font-semibold">Leave History</h2>
