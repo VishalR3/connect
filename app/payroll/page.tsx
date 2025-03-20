@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import CollapsibleSection from "@/components/common/collapsible-section";
 import PayrollPieChart from "./payroll-pie-chart";
 import { formatIndianCurrency } from "@/utils/utils";
@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 import dayjs from "dayjs";
 import StickyHeader from "@/components/common/sticky-header";
+import PayrollPDF from "@/components/payroll/payroll-pdf";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 const earnings = [
   {
@@ -68,6 +70,29 @@ const deductions = [
 
 export default function Payroll() {
   const [selectedMonth, setSelectedMonth] = useState(dayjs().startOf("month"));
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
+
+  const payrollData = {
+    name: "John Doe",
+    id: "EMP1234",
+    payPeriod: `${dayjs().startOf("month").format("DD.MM.YY")} - ${dayjs()
+      .endOf("month")
+      .format("DD.MM.YY")}`,
+    payDate: dayjs().endOf("month").add(5, "day").format("DD.MM.YY"),
+    earnings: [
+      { type: "Basic Salary", amount: "20,341.00" },
+      { type: "House Rent Allowance", amount: "10,360.00" },
+    ],
+    deductions: [
+      { type: "Income Tax", amount: "5,569.00" },
+      { type: "Provident Fund", amount: "2,200.00" },
+    ],
+    netPay: "22,910.00",
+  };
 
   const totalEarnings = useMemo(
     () => earnings.reduce((a, b) => a + b.amount, 0),
@@ -151,10 +176,25 @@ export default function Payroll() {
           </CollapsibleSection>
         </div>
         <div>
-          <Button className="w-full min-h-12">
-            <Download />
-            Download Payslip
-          </Button>
+          <Suspense>
+            {loaded && (
+              <PDFDownloadLink
+                document={<PayrollPDF payrollData={payrollData} />}
+                fileName="Payroll.pdf"
+              >
+                {({ loading }) =>
+                  loading ? (
+                    "Generating PDF..."
+                  ) : (
+                    <Button className="w-full min-h-12">
+                      <Download />
+                      Download Payslip
+                    </Button>
+                  )
+                }
+              </PDFDownloadLink>
+            )}
+          </Suspense>
         </div>
       </div>
     </>
