@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import BottomNavigation from "./BottomNavigation";
+import BottomNavigationBar from "./bottom-navigation-bar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,17 +45,15 @@ export default function RootLayout({
           {children}
           {modal}
           <div
-            className="border-t"
+            className="border-t bg-background/80 backdrop-blur-md bg-blend-luminosity"
             style={{
               width: "100dvw",
               position: "fixed",
               bottom: 0,
-              height: "calc(4rem + env(safe-area-inset-bottom))",
               paddingBottom: "env(safe-area-inset-bottom)",
-              backgroundColor: "var(--background)",
             }}
           >
-            <BottomNavigation />
+            <BottomNavigationBar />
           </div>
         </div>
       </body>

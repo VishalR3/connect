@@ -21,7 +21,7 @@ export default function StickyHeader({
   return (
     <div
       className={cn(
-        "flex justify-between items-center px-4 sticky top-0 pt-4 pb-2 z-50 bg-background",
+        "flex justify-between items-center px-4 sticky top-0 pt-4 pb-2 z-50 bg-background/80 backdrop-blur-md bg-blend-luminosity",
         trigger && "shadow-sm",
         className
       )}
