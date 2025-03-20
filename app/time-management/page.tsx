@@ -2,8 +2,6 @@ import { Calendar } from "@/components/ui/calendar";
 import dayjs from "dayjs";
 import LeaveRecord from "./leave-record";
 import { useCallback } from "react";
-import { Button } from "@/components/ui/button";
-import { CalendarClock, CalendarPlus } from "lucide-react";
 import ApplyTimeOffBtn from "./apply-time-off-btn";
 
 export default function TimeManagement() {
