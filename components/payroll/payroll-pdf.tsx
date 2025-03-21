@@ -15,8 +15,13 @@ Font.register({
   src: "http://fonts.gstatic.com/s/montserrat/v10/zhcz-_WihjSQC0oHJ9TCYC3USBnSvpkopQaUR-2r7iU.ttf",
 });
 
+Font.register({
+  family: "Space Mono",
+  src: "http://fonts.gstatic.com/s/spacemono/v1/adVweg3BJhE6r8jYmXseHS3USBnSvpkopQaUR-2r7iU.ttf",
+});
+
 const styles = StyleSheet.create({
-  page: { padding: 20, fontSize: 10, fontFamily: "Montserrat" },
+  page: { padding: 20, fontSize: 10, fontFamily: "Space Mono" },
   section: { padding: 12, border: "1 solid black", borderBottom: 0 },
   halfSection: {
     width: "50%",
