@@ -1,9 +1,19 @@
+"use client";
 import CollapsibleSection from "@/components/common/collapsible-section";
 import StickyHeader from "@/components/common/sticky-header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { authClient } from "@/lib/auth-client";
 import { Settings } from "lucide-react";
 
 export default function ProfilePage() {
+  const {
+    data: session,
+    isPending, //loading state
+    error, //error object
+  } = authClient.useSession();
+
+  console.log(session, isPending, error);
+
   const profileData = {
     name: "John Doe",
     email: "john.doe@example.com",
@@ -20,6 +30,7 @@ export default function ProfilePage() {
       phone: "+1 (555) 987-6543",
     },
   };
+
   return (
     <div className="flex flex-col gap-6 pb-4">
       <StickyHeader className="px-4 border-b gap-4">
