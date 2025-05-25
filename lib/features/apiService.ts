@@ -6,5 +6,5 @@ export const apiService = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_BASE_URL}api/`,
   }),
   endpoints: () => ({}),
-  tagTypes: ["User", "Leave"],
+  tagTypes: ["User", "Leave", "Payroll"],
 });

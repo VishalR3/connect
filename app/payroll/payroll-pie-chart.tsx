@@ -7,41 +7,39 @@ import {
 } from "@/components/ui/chart";
 import { formatIndianCurrency } from "@/utils/utils";
 import { Label, Pie, PieChart } from "recharts";
+import { PayrollRecord } from "../types";
 
-const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 190, fill: "var(--color-other)" },
-];
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  chrome: {
-    label: "Chrome",
+  earnings: {
+    label: "Earnings",
     color: "hsl(var(--chart-1))",
   },
-  safari: {
-    label: "Safari",
+  deductions: {
+    label: "Deductions",
     color: "hsl(var(--chart-2))",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-3))",
-  },
-  edge: {
-    label: "Edge",
-    color: "hsl(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
-    color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig;
 
-export default function PayrollPieChart({ value }: { value: number }) {
+export default function PayrollPieChart({
+  payroll,
+}: {
+  payroll: PayrollRecord | null;
+}) {
+  const chartData = payroll
+    ? [
+        {
+          name: "earnings",
+          value: payroll.totalEarnings,
+          fill: "hsl(var(--chart-2))",
+        },
+        {
+          name: "deductions",
+          value: payroll.totalDeductions,
+          fill: "hsl(var(--chart-1))",
+        },
+      ]
+    : [];
+
   return (
     <ChartContainer
       config={chartConfig}
@@ -54,8 +52,8 @@ export default function PayrollPieChart({ value }: { value: number }) {
         />
         <Pie
           data={chartData}
-          dataKey="visitors"
-          nameKey="browser"
+          dataKey="value"
+          nameKey="name"
           innerRadius={60}
           strokeWidth={5}
         >
@@ -74,7 +72,7 @@ export default function PayrollPieChart({ value }: { value: number }) {
                       y={viewBox.cy}
                       className="fill-foreground text-xl font-bold"
                     >
-                      {formatIndianCurrency(value)}
+                      {formatIndianCurrency(payroll?.grossSalary ?? 0)}
                     </tspan>
                     <tspan
                       x={viewBox.cx}
