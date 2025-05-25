@@ -19,7 +19,7 @@ export default function ApplyTimeOffBtn() {
         maxWidth="lg"
       >
         <div className="px-4 h-full">
-          <TimeOffPage />
+          <TimeOffPage handleClose={() => setOpen(false)} />
         </div>
       </DialogOrDrawer>
     </>

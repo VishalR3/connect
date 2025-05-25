@@ -3,16 +3,22 @@ import CollapsibleSection from "@/components/common/collapsible-section";
 import StickyHeader from "@/components/common/sticky-header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { authClient } from "@/lib/auth-client";
+import { useGetUserQuery } from "@/lib/features/userService";
 import { Settings } from "lucide-react";
 
 export default function ProfilePage() {
   const {
     data: session,
     isPending, //loading state
-    error, //error object
   } = authClient.useSession();
 
-  console.log(session, isPending, error);
+  const {
+    data: user,
+    isLoading,
+    isError,
+  } = useGetUserQuery(session?.user.id, {
+    skip: isPending || !session?.user.id,
+  });
 
   const profileData = {
     name: "John Doe",
@@ -36,12 +42,14 @@ export default function ProfilePage() {
       <StickyHeader className="px-4 border-b gap-4">
         <div>
           <Avatar className="size-12">
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>JD</AvatarFallback>
+            <AvatarImage src="https://github.com/vishalr3.png" />
+            <AvatarFallback>
+              {session?.user.name.split(" ").reduce((a, b) => a[0] + b[0], "")}
+            </AvatarFallback>
           </Avatar>
         </div>
         <div className="flex-1 grid grid-rows-2">
-          <div className="text-lg font-bold">{profileData.name}</div>
+          <div className="text-lg font-bold">{session?.user.name}</div>
           <div className="text-sm text-muted-foreground">
             {profileData.designation}
           </div>

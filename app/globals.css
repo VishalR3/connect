@@ -122,8 +122,12 @@
   }
 }
 
-.leaveDay{
+.leaveDay {
   background-color: var(--color-blue-100);
   border-radius: 50%;
   border: 0.5rem solid var(--background);
+}
+
+.upcomingLeaves {
+  background-color: var(--color-amber-200);
 }
