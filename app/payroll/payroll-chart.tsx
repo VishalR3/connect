@@ -1,6 +1,10 @@
 "use client";
 
 import { Bar, BarChart, XAxis } from "recharts";
+import { useMemo } from "react";
+import { authClient } from "@/lib/auth-client";
+import { useGetPayrollsQuery } from "@/lib/features/payrollService";
+import dayjs from "dayjs";
 
 import {
   ChartConfig,
@@ -9,27 +13,54 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
-
-const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "#2563eb",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "#60a5fa",
-  },
-} satisfies ChartConfig;
-
 export default function PayrollChart() {
+  const { data: session, isPending } = authClient.useSession();
+
+  const {
+    data: payrolls,
+    isLoading,
+    isError,
+    isUninitialized,
+  } = useGetPayrollsQuery(session?.user.id, {
+    skip: isPending || !session?.user.id,
+  });
+
+  const chartData = useMemo(() => {
+    if (!payrolls) return [];
+    return [...payrolls].reverse().map((payroll) => ({
+      month: dayjs(payroll.periodStart).format("MMM"),
+      earnings: payroll.totalEarnings,
+      deductions: payroll.totalDeductions,
+    }));
+  }, [payrolls]);
+
+  const chartConfig = {
+    earnings: {
+      label: "Earnings",
+      color: "hsl(var(--chart-1))",
+    },
+    deductions: {
+      label: "Deductions",
+      color: "hsl(var(--chart-2))",
+    },
+  } satisfies ChartConfig;
+
+  if (isLoading || isUninitialized || !chartData.length) {
+    return (
+      <div className="min-h-[200px] w-full border rounded-md flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="min-h-[200px] w-full border rounded-md flex items-center justify-center text-destructive">
+        Error loading payroll data
+      </div>
+    );
+  }
+
   return (
     <ChartContainer
       config={chartConfig}
@@ -41,14 +72,13 @@ export default function PayrollChart() {
           tickLine={false}
           tickMargin={10}
           axisLine={false}
-          tickFormatter={(value) => value.slice(0, 3)}
         />
         <ChartTooltip
           cursor={false}
           content={<ChartTooltipContent indicator="dashed" />}
         />
-        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-        <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+        <Bar dataKey="earnings" fill="var(--color-earnings)" radius={4} />
+        <Bar dataKey="deductions" fill="var(--color-deductions)" radius={4} />
       </BarChart>
     </ChartContainer>
   );
